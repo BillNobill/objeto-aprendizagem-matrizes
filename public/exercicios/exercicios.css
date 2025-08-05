@@ -1,23 +1,29 @@
 * {
         box-sizing: border-box;
       }
+      html {
+        height: 100%;
+      }
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #eef2f7;
+        background: linear-gradient(to bottom, #eef2f7, #dcd6f7);
         text-align: center;
         padding: 20px;
         color: #333;
+        margin: 0;
+        min-height: 100%;
+        background-attachment: fixed;
       }
       #game {
         max-width: 800px;
         margin: auto;
-        background: white;
+        background: #ecf0f1;
         padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
       }
       h1 {
-        color: #2c3e50;
+        color: #4a0072;
       }
       .matrix-table {
         margin: 20px auto;
@@ -26,7 +32,7 @@
       .matrix-table td {
         width: 45px;
         height: 45px;
-        border: 2px solid #bdc3c7;
+        border: 2px solid #8e44ad;
         text-align: center;
         font-size: 18px;
         font-weight: bold;
@@ -37,32 +43,33 @@
         border: none;
         text-align: center;
         font-size: 18px;
-        background-color: #ecf0f1;
+        background-color: #fff;
         color: #2c3e50;
         font-weight: bold;
       }
       input[type="number"]:focus {
-        outline: 2px solid #3498db;
+        outline: 2px solid #9b59b6;
       }
       #feedback {
         margin-top: 15px;
         font-weight: bold;
         font-size: 18px;
+        color: #4a0072;
       }
       button {
         margin-top: 20px;
         padding: 12px 25px;
         font-size: 18px;
         cursor: pointer;
-        background-color: #3498db;
+        background-color: #9b59b6;
         color: white;
         border: none;
-        border-radius: 8px;
+        border-radius: 12px;
         transition: background-color 0.3s, transform 0.2s;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 6px 12px rgba(155, 89, 182, 0.6);
       }
       button:hover {
-        background-color: #2980b9;
+        background-color: #8e44ad;
         transform: translateY(-2px);
       }
       #matching-game-container {
@@ -74,7 +81,7 @@
       .matching-list {
         list-style: none;
         padding: 0;
-        width: 48%; /* Adjusted width */
+        width: 48%;
       }
       .matching-item,
       .drop-zone {
@@ -91,8 +98,8 @@
         font-weight: bold;
       }
       .drop-zone {
-        background-color: #ecf0f1;
-        border: 2px dashed #bdc3c7;
+        background-color: #fff;
+        border: 2px dashed #8e44ad;
         min-height: 60px;
         display: flex;
         flex-direction: column;
@@ -114,8 +121,8 @@
         opacity: 0.5;
       }
       .drop-zone.over {
-        background-color: #e0e6e8;
-        border-color: #3498db;
+        background-color: #f4eef7;
+        border-color: #9b59b6;
       }
       .choice-container {
         display: grid;
@@ -131,15 +138,118 @@
         transition: border-color 0.3s, background-color 0.3s;
       }
       .matrix-choice:hover {
-        border-color: #3498db;
+        border-color: #9b59b6;
       }
       .matrix-choice.selected {
-          border-color: #2980b9;
-          background-color: #eaf5fb;
+          border-color: #8e44ad;
+          background-color: #f4eef7;
       }
       .matrix-choice input[type="radio"] {
         margin-right: 10px;
       }
       .matrix-choice .matrix-table {
           margin: 10px auto 0 auto;
+      }
+      .triangular-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+      }
+      .triangular-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      .triangular-inputs {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-top: 30px;
+      }
+      .triangular-inputs div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .triangular-inputs label {
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #4a0072;
+      }
+      .triangular-inputs input[type="text"] {
+        width: 120px;
+        padding: 12px;
+        text-align: center;
+        font-size: 20px;
+        border: 2px solid #8e44ad;
+        border-radius: 10px;
+        text-transform: uppercase;
+        background-color: #f4eef7;
+        color: #4a0072;
+        font-weight: bold;
+        transition: all 0.3s ease;
+      }
+      .triangular-inputs input[type="text"]:focus {
+        outline: none;
+        border-color: #4a0072;
+        box-shadow: 0 0 10px rgba(142, 68, 173, 0.5);
+      }
+      .resultado-final {
+        text-align: center;
+      }
+      .pontuacao-final {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        font-size: 22px;
+        margin: 25px 0;
+      }
+      .certas {
+        color: #27ae60;
+        font-weight: bold;
+      }
+      .erradas {
+        color: #c0392b;
+        font-weight: bold;
+      }
+      .botoes-finais {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 30px;
+      }
+      .info-icon {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 28px;
+        color: #4a0072;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      .vf-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .vf-item {
+        background-color: #f4eef7;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      }
+      .vf-item p {
+        margin: 0 0 15px 0;
+        font-size: 18px;
+      }
+      .vf-botoes {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+      .vf-botoes label {
+        cursor: pointer;
+        font-size: 16px;
       }

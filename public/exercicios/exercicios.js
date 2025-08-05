@@ -97,27 +97,136 @@ function gerarDesafioMatriz(linhas, colunas) {
           validar: validarEscolha,
         },
         {
-          titulo: "Matriz Triangular Superior",
-          descricao: "Preencha uma matriz 3x3 com zeros abaixo da diagonal principal.",
-          gerar: () => gerarDesafioMatriz(3, 3),
-          validar: (m) => m.every((l, i) => l.every((n, j) => (i > j ? n == 0 : true))),
+          titulo: "Matrizes Triangulares",
+          descricao: "Observe as matrizes e identifique a Triangular Superior e a Triangular Inferior. Digite a letra correspondente em cada campo.",
+          gerar: gerarExercicioTriangular,
+          validar: validarExercicioTriangular,
         },
         {
-          titulo: "Matriz Triangular Inferior",
-          descricao: "Preencha uma matriz 3x3 com zeros acima da diagonal principal.",
-          gerar: () => gerarDesafioMatriz(3, 3),
-          validar: (m) => m.every((l, i) => l.every((n, j) => (i < j ? n == 0 : true))),
-        },
-        {
-          titulo: "Matriz Simétrica (Interativo)",
+          titulo: "Matriz Simétrica",
           descricao: "Complete a matriz para que ela seja simétrica (A[i][j] = A[j][i]).",
           gerar: gerarExercicioSimetrica,
           validar: validarExercicioSimetrica,
+        },
+        {
+          titulo: "Verdadeiro ou Falso",
+          descricao: "Avalie as afirmações sobre os tipos de matrizes e marque como Verdadeiro ou Falso.",
+          gerar: gerarExercicioVerdadeiroFalso,
+          validar: validarExercicioVerdadeiroFalso,
         },
       ];
 
       let faseAtual = 0;
       let dadosFase;
+      let pontuacao = {
+        certas: 0,
+        erradas: 0,
+      };
+
+      function gerarExercicioVerdadeiroFalso() {
+        const afirmacoes = [
+            { afirmativa: "A transposta de uma matriz 2x3 é uma matriz 3x2.", resposta: true },
+            { afirmativa: "Toda matriz identidade é uma matriz escalar.", resposta: true },
+            { afirmativa: "Uma matriz antissimétrica deve ter todos os elementos da diagonal principal iguais a zero.", resposta: true },
+            { afirmativa: "A matriz unidade é o mesmo que a matriz identidade.", resposta: true },
+            { afirmativa: "A transposta de uma matriz diagonal é sempre ela mesma.", resposta: true },
+            { afirmativa: "Uma matriz normal é sempre simétrica.", resposta: false },
+            { afirmativa: "A matriz [[0, -1], [1, 0]] é antissimétrica.", resposta: true },
+            { afirmativa: "Toda matriz escalar é uma matriz identidade.", resposta: false },
+        ].sort(() => Math.random() - 0.5).slice(0, 4);
+
+        dadosFase = { afirmacoes };
+
+        let html = '<div class="vf-container">';
+        afirmacoes.forEach((item, index) => {
+            html += `
+                <div class="vf-item">
+                    <p>${item.afirmativa}</p>
+                    <div class="vf-botoes">
+                        <label><input type="radio" name="vf-${index}" value="true"> Verdadeiro</label>
+                        <label><input type="radio" name="vf-${index}" value="false"> Falso</label>
+                    </div>
+                </div>
+            `;
+        });
+        html += '</div>';
+        document.getElementById("desafio").innerHTML = html;
+    }
+
+    function validarExercicioVerdadeiroFalso() {
+        const { afirmacoes } = dadosFase;
+        for (let i = 0; i < afirmacoes.length; i++) {
+            const respostaUsuario = document.querySelector(`input[name="vf-${i}"]:checked`);
+            if (!respostaUsuario || (respostaUsuario.value === 'true') !== afirmacoes[i].resposta) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+      function gerarExercicioTriangular() {
+        const letras = ['A', 'B', 'C', 'D', 'E', 'F'];
+        const superiorCorreta = { matriz: [[1, 2, 3], [0, 4, 5], [0, 0, 6]], tipo: 'S' };
+        const inferiorCorreta = { matriz: [[1, 0, 0], [2, 3, 0], [4, 5, 6]], tipo: 'I' };
+        const incorretas = [
+            { matriz: [[1, 2, 3], [0, 4, 5], [1, 0, 6]], tipo: 'N' },
+            { matriz: [[1, 0, 0], [2, 3, 1], [4, 5, 6]], tipo: 'N' },
+            { matriz: [[1, 2, 0], [3, 4, 0], [0, 5, 6]], tipo: 'N' },
+            { matriz: [[1, 0, 2], [0, 3, 0], [4, 0, 5]], tipo: 'N' },
+            { matriz: [[9, 8, 7], [6, 5, 4], [3, 2, 1]], tipo: 'N' },
+            { matriz: [[0, 0, 1], [0, 2, 0], [3, 0, 0]], tipo: 'N' }
+        ].sort(() => Math.random() - 0.5);
+
+        const matrizesFinais = new Array(6);
+        matrizesFinais[2] = superiorCorreta; // C
+        matrizesFinais[5] = inferiorCorreta; // F
+
+        let incorretasIndex = 0;
+        for (let i = 0; i < 6; i++) {
+            if (!matrizesFinais[i]) {
+                matrizesFinais[i] = incorretas[incorretasIndex++];
+            }
+        }
+
+        dadosFase = {
+            respostaSuperior: 'C',
+            respostaInferior: 'F'
+        };
+
+        let html = '<div class="triangular-container">';
+        matrizesFinais.forEach((item, index) => {
+            html += `
+                <div class="triangular-item">
+                    <strong>${letras[index]}</strong>
+                    ${gerarMatriz(3, 3, true, item.matriz)}
+                </div>
+            `;
+        });
+        html += '</div>';
+
+        html += `
+            <div class="triangular-inputs">
+                <div>
+                    <label for="superior-input">Triangular Superior:</label>
+                    <input type="text" id="superior-input" maxlength="1" placeholder="Letra">
+                </div>
+                <div>
+                    <label for="inferior-input">Triangular Inferior:</label>
+                    <input type="text" id="inferior-input" maxlength="1" placeholder="Letra">
+                </div>
+            </div>
+        `;
+
+        document.getElementById("desafio").innerHTML = html;
+    }
+
+    function validarExercicioTriangular() {
+        const respostaUsuarioSuperior = document.getElementById('superior-input').value.toUpperCase();
+        const respostaUsuarioInferior = document.getElementById('inferior-input').value.toUpperCase();
+
+        return respostaUsuarioSuperior === dadosFase.respostaSuperior && 
+               respostaUsuarioInferior === dadosFase.respostaInferior;
+    }
 
       function gerarExercicioSimetrica() {
         const tamanho = 3;
@@ -183,33 +292,34 @@ function gerarDesafioMatriz(linhas, colunas) {
       function gerarJogoDeConexao() {
         const tipos = [
           {
-            nome: "Matriz Quadrada (2x2)",
+            nome: "Matriz Quadrada",
             linhas: 2,
             colunas: 2,
             id: "quadrada",
           },
           {
-            nome: "Matriz Retangular (2x3)",
+            nome: "Matriz Retangular",
             linhas: 2,
             colunas: 3,
             id: "retangular",
           },
-          { nome: "Matriz Linha (1x3)", linhas: 1, colunas: 3, id: "linha" },
-          { nome: "Matriz Coluna (3x1)", linhas: 3, colunas: 1, id: "coluna" },
+          { nome: "Matriz Linha", linhas: 1, colunas: 3, id: "linha" },
+          { nome: "Matriz Coluna", linhas: 3, colunas: 1, id: "coluna" },
         ];
 
         dadosFase = { tipos: tipos.map((t) => t.id) };
-        const tiposEmbaralhados = [...tipos].sort(() => Math.random() - 0.5);
+        const tiposEmbaralhadosParaArrastar = [...tipos].sort(() => Math.random() - 0.5);
+        const tiposEmbaralhadosParaSoltar = [...tipos].sort(() => Math.random() - 0.5);
 
         let html = '<div id="matching-game-container">';
         html += '<ul class="matching-list">';
-        tiposEmbaralhados.forEach((tipo) => {
+        tiposEmbaralhadosParaArrastar.forEach((tipo) => {
           html += `<li class="matching-item" draggable="true" data-id="${tipo.id}">${tipo.nome}</li>`;
         });
         html += "</ul>";
 
         html += '<ul class="matching-list">';
-        tipos.forEach((tipo) => {
+        tiposEmbaralhadosParaSoltar.forEach((tipo) => {
           html += `<li class="drop-zone" data-id="${tipo.id}">${gerarMatriz(
             tipo.linhas,
             tipo.colunas,
@@ -295,6 +405,10 @@ function gerarDesafioMatriz(linhas, colunas) {
         let valida;
         if (fase.validar === validarEscolha) {
             valida = validarEscolha();
+        } else if (fase.validar === validarExercicioTriangular) {
+            valida = validarExercicioTriangular();
+        } else if (fase.validar === validarExercicioVerdadeiroFalso) {
+            valida = validarExercicioVerdadeiroFalso();
         } else {
             const matrizUsuario = fase.validar === validarJogoDeConexao ? null : getMatrizDoUsuario();
             valida = fase.validar(matrizUsuario);
@@ -302,11 +416,13 @@ function gerarDesafioMatriz(linhas, colunas) {
 
         const feedback = document.getElementById("feedback");
         if (valida) {
+          pontuacao.certas++;
           feedback.innerText = "✅ Correto! Avançando para a próxima fase...";
           feedback.style.color = "#27ae60";
           verifyButton.disabled = true;
           setTimeout(() => proximaFase(), 2000);
         } else {
+          pontuacao.erradas++;
           feedback.innerText = "❌ Verifique sua resposta e tente novamente.";
           feedback.style.color = "#c0392b";
         }
@@ -315,10 +431,32 @@ function gerarDesafioMatriz(linhas, colunas) {
       function proximaFase() {
         faseAtual++;
         if (faseAtual >= fases.length) {
-          document.getElementById("game").innerHTML =
-            "<h2>🎉 Parabéns! Você completou todas as fases.</h2>";
+          mostrarResultadoFinal();
           return;
         }
+        carregarFase();
+      }
+
+      function mostrarResultadoFinal() {
+        document.getElementById("game").innerHTML = `
+          <div class="resultado-final">
+            <h2>🎉 Parabéns! Você completou todas as fases.</h2>
+            <p>Sua pontuação:</p>
+            <div class="pontuacao-final">
+                <span class="certas">✔ Certas: ${pontuacao.certas}</span>
+                <span class="erradas">✖ Erradas: ${pontuacao.erradas}</span>
+            </div>
+            <div class="botoes-finais">
+                <button onclick="reiniciarJogo()">Tentar Novamente</button>
+                <button onclick="window.location.href = '../index.html'">Voltar aos Cards</button>
+            </div>
+          </div>
+        `;
+      }
+
+      function reiniciarJogo() {
+        faseAtual = 0;
+        pontuacao = { certas: 0, erradas: 0 };
         carregarFase();
       }
 

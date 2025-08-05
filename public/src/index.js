@@ -15,8 +15,8 @@ const matrizes = [
     texto: "Diagonal principal com 1 e o resto com 0.",
   },
   {
-    tipo: "Matriz Oposta",
-    texto: "Todos os elementos são o oposto (negativo) de outra matriz.",
+    tipo: "Matriz Unidade",
+    texto: "É um sinônimo para a Matriz Identidade.",
   },
   { tipo: "Matriz Transposta", texto: "Troca as linhas pelas colunas." },
   { tipo: "Matriz Simétrica", texto: "É igual à sua transposta." },
@@ -37,12 +37,8 @@ const matrizes = [
     texto: "Elementos acima da diagonal principal são zero.",
   },
   {
-    tipo: "Matriz Singular",
-    texto: "Determinante igual a zero (não tem inversa).",
-  },
-  {
-    tipo: "Matriz Inversa",
-    texto: "Quando multiplicada pela matriz original, resulta na identidade.",
+    tipo: "Matriz Normal",
+    texto: "Uma matriz A é normal se A*A = AA*, onde A* é a transposta conjugada de A.",
   },
 ];
 
