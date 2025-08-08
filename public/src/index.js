@@ -38,7 +38,8 @@ const matrizes = [
   },
   {
     tipo: "Matriz Normal",
-    texto: "Uma matriz A é normal se A*A = AA*, onde A* é a transposta conjugada de A.",
+    texto:
+      "Uma matriz A é normal se A*A = AA*, onde A* é a transposta conjugada de A.",
   },
 ];
 
@@ -71,5 +72,5 @@ matrizes.forEach((matriz) => {
 });
 
 document.getElementById("btnProximaTela").addEventListener("click", () => {
-  window.location.href = "/exercicios/exercicios.html";
+  window.location.href = "public/exercicios/exercicios.html";
 });
