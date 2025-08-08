@@ -1,255 +1,341 @@
 * {
-        box-sizing: border-box;
-      }
-      html {
-        height: 100%;
-      }
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(to bottom, #eef2f7, #dcd6f7);
-        text-align: center;
-        padding: 20px;
-        color: #333;
-        margin: 0;
-        min-height: 100%;
-        background-attachment: fixed;
-      }
-      #game {
-        max-width: 800px;
-        margin: auto;
-        background: #ecf0f1;
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      }
-      h1 {
-        color: #4a0072;
-      }
-      .matrix-table {
-        margin: 20px auto;
-        border-collapse: collapse;
-      }
-      .matrix-table td {
-        width: 45px;
-        height: 45px;
-        border: 2px solid #8e44ad;
-        text-align: center;
-        font-size: 18px;
-        font-weight: bold;
-      }
-      input[type="number"] {
-        width: 100%;
-        height: 100%;
-        border: none;
-        text-align: center;
-        font-size: 18px;
-        background-color: #fff;
-        color: #2c3e50;
-        font-weight: bold;
-      }
-      input[type="number"]:focus {
-        outline: 2px solid #9b59b6;
-      }
-      #feedback {
-        margin-top: 15px;
-        font-weight: bold;
-        font-size: 18px;
-        color: #4a0072;
-      }
-      button {
-        margin-top: 20px;
-        padding: 12px 25px;
-        font-size: 18px;
-        cursor: pointer;
-        background-color: #9b59b6;
-        color: white;
-        border: none;
-        border-radius: 12px;
-        transition: background-color 0.3s, transform 0.2s;
-        box-shadow: 0 6px 12px rgba(155, 89, 182, 0.6);
-      }
-      button:hover {
-        background-color: #8e44ad;
-        transform: translateY(-2px);
-      }
-      #matching-game-container {
-        display: flex;
-        justify-content: space-around;
-        align-items: flex-start;
-        margin-top: 20px;
-      }
-      .matching-list {
-        list-style: none;
-        padding: 0;
-        width: 48%;
-      }
-      .matching-item,
-      .drop-zone {
-        padding: 15px;
-        margin: 10px 0;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        cursor: grab;
-        transition: background-color 0.3s;
-      }
-      .matching-item {
-        background-color: #9b59b6;
-        color: white;
-        font-weight: bold;
-      }
-      .drop-zone {
-        background-color: #fff;
-        border: 2px dashed #8e44ad;
-        min-height: 60px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 5px;
-        padding: 10px;
-      }
-      .drop-zone .matching-item {
-        margin: 0;
-        padding: 8px;
-        cursor: default;
-        width: 90%;
-      }
-      .drop-zone .matrix-table {
-        margin: 0;
-      }
-      .dragging {
-        opacity: 0.5;
-      }
-      .drop-zone.over {
-        background-color: #f4eef7;
-        border-color: #9b59b6;
-      }
-      .choice-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-        margin-top: 20px;
-      }
-      .matrix-choice {
-        padding: 15px;
-        border: 2px solid #ecf0f1;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: border-color 0.3s, background-color 0.3s;
-      }
-      .matrix-choice:hover {
-        border-color: #9b59b6;
-      }
-      .matrix-choice.selected {
-          border-color: #8e44ad;
-          background-color: #f4eef7;
-      }
-      .matrix-choice input[type="radio"] {
-        margin-right: 10px;
-      }
-      .matrix-choice .matrix-table {
-          margin: 10px auto 0 auto;
-      }
-      .triangular-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-        margin-top: 20px;
-      }
-      .triangular-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-      }
-      .triangular-inputs {
-        display: flex;
-        justify-content: center;
-        gap: 40px;
-        margin-top: 30px;
-      }
-      .triangular-inputs div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .triangular-inputs label {
-        font-weight: bold;
-        margin-bottom: 10px;
-        color: #4a0072;
-      }
-      .triangular-inputs input[type="text"] {
-        width: 120px;
-        padding: 12px;
-        text-align: center;
-        font-size: 20px;
-        border: 2px solid #8e44ad;
-        border-radius: 10px;
-        text-transform: uppercase;
-        background-color: #f4eef7;
-        color: #4a0072;
-        font-weight: bold;
-        transition: all 0.3s ease;
-      }
-      .triangular-inputs input[type="text"]:focus {
-        outline: none;
-        border-color: #4a0072;
-        box-shadow: 0 0 10px rgba(142, 68, 173, 0.5);
-      }
-      .resultado-final {
-        text-align: center;
-      }
-      .pontuacao-final {
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-        font-size: 22px;
-        margin: 25px 0;
-      }
-      .certas {
-        color: #27ae60;
-        font-weight: bold;
-      }
-      .erradas {
-        color: #c0392b;
-        font-weight: bold;
-      }
-      .botoes-finais {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        margin-top: 30px;
-      }
-      .info-icon {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        font-size: 28px;
-        color: #4a0072;
-        text-decoration: none;
-        font-weight: bold;
-      }
-      .vf-container {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-      }
-      .vf-item {
-        background-color: #f4eef7;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-      }
-      .vf-item p {
-        margin: 0 0 15px 0;
-        font-size: 18px;
-      }
-      .vf-botoes {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-      }
-      .vf-botoes label {
-        cursor: pointer;
-        font-size: 16px;
-      }
+  box-sizing: border-box;
+}
+html {
+  height: 100%;
+}
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom, #eef2f7, #dcd6f7);
+  text-align: center;
+  padding: 20px;
+  color: #333;
+  margin: 0;
+  min-height: 100%;
+  background-attachment: fixed;
+}
+#game {
+  max-width: 800px;
+  margin: auto;
+  background: #ecf0f1;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+h1 {
+  color: #4a0072;
+}
+.matrix-table {
+  margin: 20px auto;
+  border-collapse: collapse;
+}
+.matrix-table td {
+  width: 45px;
+  height: 45px;
+  border: 2px solid #4a0072;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+input[type="number"] {
+  width: 100%;
+  height: 100%;
+  border: none;
+  text-align: center;
+  font-size: 18px;
+  background-color: #fff;
+  color: #2c3e50;
+  font-weight: bold;
+}
+input[type="number"]:focus {
+  outline: 2px solid #4a0072;
+}
+#feedback {
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #4a0072;
+}
+button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: #4a0072;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 6px 12px rgba(155, 89, 182, 0.6);
+}
+button:hover {
+  background-color: #4a0072;
+  transform: translateY(-2px);
+}
+#matching-game-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+.matching-list {
+  list-style: none;
+  padding: 0;
+  width: 48%;
+}
+.matching-item,
+.drop-zone {
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: grab;
+  transition: background-color 0.3s;
+}
+.matching-item {
+  background-color: #4a0072;
+  color: white;
+  font-weight: bold;
+}
+.drop-zone {
+  background-color: #fff;
+  border: 2px dashed #4a0072;
+  min-height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 10px;
+}
+.drop-zone .matching-item {
+  margin: 0;
+  padding: 8px;
+  cursor: default;
+  width: 90%;
+}
+.drop-zone .matrix-table {
+  margin: 0;
+}
+.dragging {
+  opacity: 0.5;
+}
+.drop-zone.over {
+  background-color: #f4eef7;
+  border-color: #4a0072;
+}
+.choice-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+.matrix-choice {
+  padding: 15px;
+  border: 2px solid #ecf0f1;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+.matrix-choice:hover {
+  border-color: #4a0072;
+}
+.matrix-choice.selected {
+  border-color: #4a0072;
+  background-color: #f4eef7;
+}
+.matrix-choice input[type="radio"] {
+  margin-right: 10px;
+}
+.matrix-choice .matrix-table {
+  margin: 10px auto 0 auto;
+}
+.triangular-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+.triangular-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.triangular-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 30px;
+}
+.triangular-inputs div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.triangular-inputs label {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #4a0072;
+}
+.triangular-inputs input[type="text"] {
+  width: 120px;
+  padding: 12px;
+  text-align: center;
+  font-size: 20px;
+  border: 2px solid #4a0072;
+  border-radius: 10px;
+  text-transform: uppercase;
+  background-color: #f4eef7;
+  color: #4a0072;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+.triangular-inputs input[type="text"]:focus {
+  outline: none;
+  border-color: #4a0072;
+  box-shadow: 0 0 10px rgba(142, 68, 173, 0.5);
+}
+.resultado-final {
+  text-align: center;
+}
+.pontuacao-final {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  font-size: 22px;
+  margin: 25px 0;
+}
+.certas {
+  color: #27ae60;
+  font-weight: bold;
+}
+.erradas {
+  color: #c0392b;
+  font-weight: bold;
+}
+.botoes-finais {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+.info-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 28px;
+  color: #4a0072;
+  text-decoration: none;
+  font-weight: bold;
+}
+.vf-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.vf-item {
+  background-color: #e0e6eb;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+.vf-item p {
+  margin: 0 0 15px 0;
+  font-size: 18px;
+}
+.vf-botoes {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.vf-botoes label {
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* --- Responsividade --- */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  #game {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .info-icon {
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+  }
+
+  .matrix-table td {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+
+  #matching-game-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .matching-list {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .choice-container {
+    grid-template-columns: 1fr;
+  }
+
+  .triangular-inputs {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .pontuacao-final {
+    flex-direction: column;
+    gap: 15px;
+    font-size: 20px;
+  }
+
+  .botoes-finais {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .botoes-finais button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  #game {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  .matrix-table td {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+
+  .vf-item p {
+    font-size: 16px;
+  }
+}

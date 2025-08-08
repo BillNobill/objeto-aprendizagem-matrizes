@@ -4,11 +4,91 @@
     <meta charset="UTF-8" />
     <title>Tipos de Matrizes</title>
     <link rel="stylesheet" href="../src/index.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
+    <header class="main-header">
+      <div class="logo">Matrizes</div>
+    </header>
     <div class="container">
       <h1>Tipos de Matrizes</h1>
       <p>Clique em cada carta para ver a explicação.</p>
+
+      <div class="intro-section">
+        <h2>O que é uma Matriz?</h2>
+        <p>
+          No universo da matemática, uma <strong>matriz</strong> é uma estrutura
+          poderosa para organizar e manipular dados. Imagine-a como uma tabela
+          retangular, composta por elementos dispostos em
+          <b class="purple-bold">linhas</b> (horizontais) e
+          <b class="purple-bold">colunas</b> (verticais). Cada elemento na
+          matriz possui uma posição única, definida pela linha e coluna que
+          ocupa.
+        </p>
+        <p>
+          A notação para uma matriz é <b class="purple-bold">A_m_x_n</b>, onde
+          <b class="purple-bold">A</b> é o nome da matriz,
+          <b class="purple-bold">m</b> representa o número de linhas e
+          <b class="purple-bold">n</b> o número de colunas. Essa notação de "m
+          por n" define a <strong>ordem</strong> ou <strong>dimensão</strong> da
+          matriz.
+        </p>
+
+        <div class="matrix-examples">
+          <div class="matrix-example">
+            <p>Matriz A de ordem 2x3</p>
+            <table class="matrix-table">
+              <tr>
+                <td>7</td>
+                <td>-1</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td>0</td>
+                <td>10</td>
+                <td>2</td>
+              </tr>
+            </table>
+          </div>
+          <div class="matrix-example">
+            <p>Matriz B de ordem 3x2</p>
+            <table class="matrix-table">
+              <tr>
+                <td>X</td>
+                <td>Y</td>
+              </tr>
+              <tr>
+                <td>Z</td>
+                <td>W</td>
+              </tr>
+              <tr>
+                <td>P</td>
+                <td>Q</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <p>
+          As matrizes não são apenas abstrações teóricas; elas são ferramentas
+          essenciais em inúmeras aplicações práticas. Na
+          <b class="purple-bold">computação gráfica</b>, são usadas para criar
+          transformações em 3D, como rotação e escala de objetos. Em
+          <b class="purple-bold">sistemas de equações lineares</b>, oferecem um
+          método claro para encontrar soluções. Na
+          <b class="purple-bold">ciência de dados</b>, são a base para armazenar
+          e processar grandes conjuntos de informações.
+        </p>
+        <p>
+          Compreender os diferentes <strong>tipos de matrizes</strong> é o
+          primeiro passo para dominar sua utilização. Cada tipo possui
+          propriedades e regras únicas que os tornam adequados para problemas
+          específicos. Explore os cards abaixo para conhecer as principais
+          classificações e suas características.
+        </p>
+        <hr />
+        <h2>Explore os Tipos de Matrizes</h2>
+      </div>
 
       <div id="lista-matrizes" class="grid-cartas">
         <!-- As cartas serão inseridas aqui pelo JS -->
@@ -16,6 +96,13 @@
 
       <button id="btnProximaTela">Próxima Tela</button>
     </div>
+
+    <footer class="main-footer">
+      <p>
+        &copy; 2024 Objeto de Aprendizagem de Matrizes. Todos os direitos
+        reservados.
+      </p>
+    </footer>
 
     <script src="src/index.js"></script>
   </body>

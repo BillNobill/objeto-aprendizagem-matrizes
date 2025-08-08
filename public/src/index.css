@@ -5,8 +5,20 @@ body {
   padding: 0;
 }
 
+.main-header {
+  background-color: #4a0072;
+  color: white;
+  padding: 15px calc((100% - 800px) / 2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+}
+
 .container {
-  max-width: 1200px;
+  max-width: 800px;
   margin: 40px auto;
   padding: 30px;
   background-color: #ecf0f1;
@@ -25,6 +37,62 @@ h1 {
   text-align: center;
   color: #333;
   margin-bottom: 25px;
+}
+
+.intro-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.intro-section h2 {
+  color: #4a0072;
+  margin-bottom: 15px;
+}
+
+.intro-section p {
+  text-align: justify;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.purple-bold {
+  color: #4a0072;
+  font-weight: bold;
+}
+
+.matrix-examples {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 20px 0;
+}
+
+.matrix-example p {
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+}
+
+.matrix-table {
+  margin: 10px auto;
+  border-collapse: collapse;
+}
+
+.matrix-table td {
+  width: 35px;
+  height: 35px;
+  border: 2px solid #4a0072;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #f4eef7;
+}
+
+.intro-section hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(74, 0, 114, 0.75), rgba(0, 0, 0, 0));
+  margin: 40px 0;
 }
 
 .grid-cartas {
@@ -67,12 +135,12 @@ h1 {
   justify-content: center;
   padding: 12px;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-  border: 2px solid #8e44ad;
+  border: 2px solid #4a0072;
   box-sizing: border-box;
 }
 
 .card-front {
-  background-color: #9b59b6;
+  background-color: #4a0072;
   color: white;
   font-weight: bold;
 }
@@ -88,7 +156,7 @@ h1 {
   display: block;
   margin: 30px auto 0 auto;
   padding: 15px 40px;
-  background-color: #9b59b6;
+  background-color: #4a0072;
   color: white;
   border: none;
   border-radius: 12px;
@@ -99,5 +167,122 @@ h1 {
 }
 
 #btnProximaTela:hover {
-  background-color: #8e44ad;
+  background-color: #4a0072;
+}
+
+.main-footer {
+  background-color: #4a0072;
+  color: #eef2f7;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 40px;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.main-footer p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* --- Responsividade --- */
+
+/* Tablet (768px) e abaixo */
+@media (max-width: 768px) {
+  .main-header {
+    padding: 15px 30px;
+  }
+
+  .header-content {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .container {
+    margin: 30px 20px;
+    padding: 25px;
+  }
+
+  .grid-cartas {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 25px;
+  }
+}
+
+/* Mobile (480px) e abaixo */
+@media (max-width: 480px) {
+  body {
+    -webkit-text-size-adjust: 100%; /* Previne o zoom automático de fontes no iOS */
+  }
+
+  .main-header {
+    padding: 15px 20px;
+  }
+
+  .header-content {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .main-nav {
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .main-nav a {
+    font-size: 16px;
+  }
+
+  .container {
+    margin: 20px 10px;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+
+  .intro-section h2 {
+    font-size: 22px;
+  }
+
+  .intro-section p {
+    font-size: 16px; /* Tamanho de fonte base para mobile */
+    text-align: left;
+  }
+
+  .matrix-examples {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .matrix-example {
+    width: 80%;
+  }
+
+  .grid-cartas {
+    grid-template-columns: 1fr !important; /* Força a coluna única */
+    gap: 20px;
+  }
+
+  .card {
+    width: 100%;
+    height: 120px; /* Altura menor para economizar espaço vertical */
+  }
+
+  .card-front {
+    font-size: 18px;
+  }
+
+  .card-back {
+    font-size: 15px;
+    padding: 15px;
+  }
+
+  /* Botão com largura total */
+  #btnProximaTela {
+    width: 100%;
+    padding: 18px 0;
+    font-size: 18px;
+    font-weight: bold;
+  }
 }
